@@ -14,23 +14,23 @@ class CompteSimple:
     '''
     CompteSimple avec un titulaire et un solde
     '''
-    numero_primaire = 10000
+    suivi_numero = 10000
 
     def __init__(self, titulaire: Personne, solde:int = 0):
         self.__solde = solde
         self.titulaire = titulaire
-        CompteSimple.numero_primaire += 1
-        self.numero = CompteSimple.numero_primaire
+        CompteSimple.suivi_numero += 1
+        self.__numero = CompteSimple.suivi_numero
     
     @property
     def solde(self):
         return self.__solde
     
-    def crediter(self, somme: int):
-        self.__solde += somme
+    def crediter(self, montant: int):
+        self.__solde += montant
     
-    def debiter(self, somme: int):
-        self.__solde -= somme
+    def debiter(self, montant: int):
+        self.__solde -= montant
 
     def __str__(self):
         return f"Le solde de {self.titulaire} est de : {self.solde}"
@@ -43,7 +43,7 @@ class CompteCourant(CompteSimple):
     
     def crediter(self, somme: int):
         super().crediter(somme)
-        self.__list_releve.append(f"Somme crédité : +{somme}")
+        self.__list_releve.append(somme)
     
     def debiter(self, somme: int):
         super().debiter(somme)
@@ -56,7 +56,7 @@ class CompteCourant(CompteSimple):
                 print(4*"-" + ">",operation)
             print()
         else:
-            print(f"Relevé du compte {self.numero}: Pas de relevé")
+            print(f"Relevé du compte {self.numero}: Pas de d'opération")
 
 class Banque:
     '''
@@ -74,11 +74,8 @@ class Banque:
     def ouvrir_compte_courant(self, client: Personne, solde: int):
         compte = CompteCourant(client, solde)
         self.__list_compte.append(compte)
-    
+        
     @property
-    def list_compte(self):
-        return self.__list_compte
-    
     def calculer_total(self):
         total = 0
         for compte in self.__list_compte:
