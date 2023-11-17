@@ -96,4 +96,3 @@ class Banque:
             except AttributeError:
                 pass
 
-
