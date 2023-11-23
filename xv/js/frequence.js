@@ -33,6 +33,9 @@ function freq_for_in(table, objet) {
 function freq_do_while(table, objet) {
     let occurence = 0;
     let i = 0;
+    if (table.length < 0) {
+        return 0;
+    }
     do {
         if (objet === table[i]) {
             occurence++;
