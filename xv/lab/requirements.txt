@@ -1,4 +1,0 @@
-argparse
-requests
-beautifulsoup4
-psycopg
